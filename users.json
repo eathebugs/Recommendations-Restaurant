@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Nguyen",
+      "lastName": "Van A",
+      "email": "test@example.com",
+      "phone": "",
+      "password": "$2a$10$XJU.r/WWlCdbTkP9K1HsIO2dOWHkgbMRyWm5.2e5no8DboWunESHe",
+      "cuisine": null,
+      "preferences": [],
+      "dietaryRestrictions": [],
+      "cuisineTypes": [],
+      "priceRange": "",
+      "minRating": 3,
+      "createdAt": "2025-12-04T07:00:11.061Z"
+    },
+    {
+      "id": 2,
+      "firstName": "TÔI YÊU",
+      "lastName": "THANG",
+      "email": "letuanthang02@gmail.com",
+      "phone": "+84905614466",
+      "password": "$2a$10$STpNV9rTBN96X7X/4uV3yOp4X4aheHr/BBUiD25FO6mSwkZ6dC3A6",
+      "cuisine": null,
+      "preferences": [
+        "Street Food"
+      ],
+      "dietaryRestrictions": [
+        "Vegan"
+      ],
+      "cuisineTypes": [
+        "Việt Nam"
+      ],
+      "priceRange": "$$$$",
+      "minRating": 4.5,
+      "createdAt": "2025-12-04T07:08:09.653Z"
+    },
+    {
+      "id": 3,
+      "firstName": "le van",
+      "lastName": "a",
+      "email": "hoanganhsaint@gmail.com",
+      "phone": "+84905614469",
+      "password": "$2a$10$3/N4eXeAtJ3aCWuRMhRwfehxTjB8pzHrA8oizGy55WRhz0aflbJ4C",
+      "cuisine": null,
+      "preferences": [
+        "Street Food",
+        "Casual Dining"
+      ],
+      "dietaryRestrictions": [
+        "Vegan"
+      ],
+      "cuisineTypes": [
+        "Thái Lan"
+      ],
+      "priceRange": "$$$$",
+      "minRating": 4.5,
+      "createdAt": "2025-12-04T07:15:59.701Z"
+    },
+    {
+      "id": 4,
+      "firstName": "Tran",
+      "lastName": "Thu",
+      "email": "tranthanhba456@gmail.com",
+      "phone": "09012131234",
+      "password": "$2a$10$RoMZDqlkbTbuAGNoZ7w/1Oyvch0P4lsNVBH1RUZ.m00JwiY8Cafc2",
+      "preferences": [
+        "Street Food",
+        "Seafood"
+      ],
+      "dietaryRestrictions": [
+        "Vegan"
+      ],
+      "cuisineTypes": [
+        "Việt Nam"
+      ],
+      "priceRange": "$$$",
+      "minRating": 4,
+      "hasPreferences": true,
+      "createdAt": "2025-12-04T07:59:08.865Z"
+    }
+  ],
+  "nextId": 5
+}

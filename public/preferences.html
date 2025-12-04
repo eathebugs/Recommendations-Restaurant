@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chọn Preferences - FoodHub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f39c12;
+        }
+        .checkbox-group, .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px;
+            border: 2px solid #ecf0f1;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .checkbox-item input, .radio-item input {
+            cursor: pointer;
+        }
+        .range-slider {
+            margin-top: 10px;
+        }
+        .range-slider input {
+            width: 100%;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        .error-message, .success-message {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .error-message {
+            color: #e74c3c;
+            background: #fadbd8;
+        }
+        .success-message {
+            color: #27ae60;
+            background: #d5f4e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Cài Đặt Preferences</h1>
+        <p class="subtitle">Chọn sở thích của bạn để nhận đề xuất cá nhân hóa</p>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <!-- Sở Thích Món Ăn -->
+        <div class="form-section">
+            <div class="section-title">❤️ Sở Thích Món Ăn</div>
+            <div class="checkbox-group" id="preferencesGroup">
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Street Food" id="pref1"><label for="pref1">Street Food</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Fine Dining" id="pref2"><label for="pref2">Fine Dining</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Casual Dining" id="pref3"><label for="pref3">Casual Dining</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Fast Food" id="pref4"><label for="pref4">Fast Food</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Buffet" id="pref5"><label for="pref5">Buffet</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="preferences" value="Seafood" id="pref6"><label for="pref6">Seafood</label></div>
+            </div>
+        </div>
+
+        <!-- Hạn Chế Chế Độ Ăn -->
+        <div class="form-section">
+            <div class="section-title">🥗 Hạn Chế Chế Độ Ăn Uống</div>
+            <div class="checkbox-group" id="dietaryGroup">
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Vegan" id="diet1"><label for="diet1">Vegan</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Vegetarian" id="diet2"><label for="diet2">Vegetarian</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Gluten-Free" id="diet3"><label for="diet3">Gluten-Free</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Dairy-Free" id="diet4"><label for="diet4">Dairy-Free</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Keto" id="diet5"><label for="diet5">Keto</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dietary" value="Halal" id="diet6"><label for="diet6">Halal</label></div>
+            </div>
+        </div>
+
+        <!-- Loại Ẩm Thực -->
+        <div class="form-section">
+            <div class="section-title">🍜 Loại Ẩm Thực Yêu Thích</div>
+            <div class="checkbox-group" id="cuisineGroup">
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Việt Nam" id="cuisine1"><label for="cuisine1">Việt Nam</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Nhật Bản" id="cuisine2"><label for="cuisine2">Nhật Bản</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Hàn Quốc" id="cuisine3"><label for="cuisine3">Hàn Quốc</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Trung Quốc" id="cuisine4"><label for="cuisine4">Trung Quốc</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Thái Lan" id="cuisine5"><label for="cuisine5">Thái Lan</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="cuisine_types" value="Ý" id="cuisine6"><label for="cuisine6">Ý</label></div>
+            </div>
+        </div>
+
+        <!-- Mức Giá -->
+        <div class="form-section">
+            <div class="section-title">💰 Mức Giá Yêu Thích</div>
+            <div class="radio-group" id="priceGroup">
+                <div class="radio-item"><input type="radio" name="priceRange" value="$" id="price1"><label for="price1">$ - Bình Dân</label></div>
+                <div class="radio-item"><input type="radio" name="priceRange" value="$$" id="price2"><label for="price2">$$ - Trung Bình</label></div>
+                <div class="radio-item"><input type="radio" name="priceRange" value="$$$" id="price3"><label for="price3">$$$ - Cao Cấp</label></div>
+                <div class="radio-item"><input type="radio" name="priceRange" value="$$$$" id="price4"><label for="price4">$$$$ - Sang Trọng</label></div>
+            </div>
+        </div>
+
+        <!-- Đánh Giá -->
+        <div class="form-section">
+            <div class="section-title">⭐ Đánh Giá Tối Thiểu</div>
+            <div class="range-slider">
+                <input type="range" id="minRating" min="1" max="5" step="0.5" value="3">
+                <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 12px;">
+                    <span>1 ⭐</span>
+                    <span>Chọn: <strong id="ratingValue">3.0</strong> ⭐</span>
+                    <span>5 ⭐</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary" onclick="skipPreferences()">Bỏ Qua</button>
+            <button type="button" class="btn btn-primary" onclick="savePreferences()">Lưu Preferences</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const minRatingInput = document.getElementById('minRating');
+        const ratingValue = document.getElementById('ratingValue');
+
+        minRatingInput.addEventListener('input', function() {
+            ratingValue.textContent = this.value;
+        });
+
+        function getCurrentUserId() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            return user ? user.id : null;
+        }
+
+        async function savePreferences() {
+            const userId = getCurrentUserId();
+            console.log('DEBUG - User ID:', userId);
+
+            if (!userId) {
+                showError('Không tìm thấy thông tin user. Vui lòng đăng nhập lại.');
+                return;
+            }
+
+            // Kiểm tra số lượng checkbox đã chọn
+            const prefCheckboxes = document.querySelectorAll('input[name="preferences"]:checked');
+            const dietCheckboxes = document.querySelectorAll('input[name="dietary"]:checked');
+            const cuisineCheckboxes = document.querySelectorAll('input[name="cuisine_types"]:checked');
+            
+            console.log('DEBUG - Preferences selected:', prefCheckboxes.length);
+            console.log('DEBUG - Dietary selected:', dietCheckboxes.length);
+            console.log('DEBUG - Cuisine selected:', cuisineCheckboxes.length);
+
+            const preferences = Array.from(prefCheckboxes).map(cb => cb.value);
+            const dietaryRestrictions = Array.from(dietCheckboxes).map(cb => cb.value);
+            const cuisineTypes = Array.from(cuisineCheckboxes).map(cb => cb.value);
+            
+            console.log('DEBUG - Preferences data:', preferences);
+            console.log('DEBUG - Dietary data:', dietaryRestrictions);
+            console.log('DEBUG - Cuisine data:', cuisineTypes);
+
+            const priceRange = document.querySelector('input[name="priceRange"]:checked')?.value;
+            const minRating = parseFloat(document.getElementById('minRating').value);
+
+            if (!priceRange) {
+                showError('Vui lòng chọn mức giá');
+                return;
+            }
+
+            try {
+                const payload = {
+                    userId,
+                    preferences,
+                    dietaryRestrictions,
+                    cuisineTypes,
+                    priceRange,
+                    minRating
+                };
+                
+                console.log('DEBUG - Sending payload:', JSON.stringify(payload, null, 2));
+
+                const response = await fetch(`${API_URL}/auth/preferences`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                console.log('DEBUG - Server response:', data);
+
+                if (!response.ok) {
+                    showError(data.message || 'Lỗi khi lưu preferences');
+                    return;
+                }
+
+                // Update localStorage
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const updatedUser = {
+                    ...currentUser,
+                    preferences,
+                    dietaryRestrictions,
+                    cuisineTypes,
+                    priceRange,
+                    minRating,
+                    hasPreferences: true
+                };
+                localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+
+                showSuccess('✅ Preferences đã được lưu! Chuyển đến dashboard...');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Lỗi kết nối. Đảm bảo server đang chạy trên http://localhost:5000');
+            }
+        }
+
+        function skipPreferences() {
+            showSuccess('Bạn có thể cài đặt preferences sau trong phần cài đặt.');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+
+        function showError(message) {
+            errorMessage.textContent = '❌ ' + message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        // Kiểm tra đăng nhập
+        window.addEventListener('load', function() {
+            if (!getCurrentUserId()) {
+                showError('Bạn chưa đăng nhập. Chuyển đến trang đăng nhập...');
+                setTimeout(() => {
+                    window.location.href = 'restaurant_login.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

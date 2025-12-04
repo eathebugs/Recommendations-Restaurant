@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Đăng Ký</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            background: white;
+            max-height: 90vh;
+        }
+        .left-side {
+            flex: 0 0 35%;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 50%, #d35400 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 40px 30px;
+        }
+        .logo-section { text-align: center; margin-bottom: 25px; }
+        .logo-section h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        .right-side {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header { margin-bottom: 20px; }
+        .header h2 { font-size: 26px; color: #2c3e50; margin-bottom: 5px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .signup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3); }
+        .signup-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .error-message, .success-message {
+            font-size: 12px;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            display: none;
+        }
+        .error-message { color: #e74c3c; background: #fadbd8; }
+        .success-message { color: #27ae60; background: #d5f4e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <div class="logo-section">
+                <h1>🍽️ FoodHub</h1>
+                <p>Gia nhập cộng đồng ẩm thực</p>
+            </div>
+            <div class="benefits">
+                <div class="benefit-item">🎯 Đề xuất nhà hàng theo sở thích</div>
+                <div class="benefit-item">🥗 Tôn trọng chế độ ăn uống</div>
+                <div class="benefit-item">💰 Tìm nhà hàng theo mức giá</div>
+                <div class="benefit-item">⭐ Lọc theo đánh giá</div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="header">
+                <h2>Tạo Tài Khoản</h2>
+                <p>Thiết lập hồ sơ để nhận đề xuất cá nhân hóa</p>
+            </div>
+
+            <form id="signupForm">
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+
+                <div class="form-group">
+                    <label for="firstName">Họ *</label>
+                    <input type="text" id="firstName" placeholder="Họ" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Tên *</label>
+                    <input type="text" id="lastName" placeholder="Tên" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số Điện Thoại</label>
+                    <input type="tel" id="phone" placeholder="(Tùy chọn)">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật Khẩu *</label>
+                    <input type="password" id="password" placeholder="8+ ký tự" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Xác Nhận Mật Khẩu *</label>
+                    <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                </div>
+
+                <button type="submit" class="signup-btn" id="submitBtn">Tạo Tài Khoản</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 15px; font-size: 13px;">
+                Bạn đã có tài khoản? <a href="restaurant_login.html">Đăng nhập ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        const signupForm = document.getElementById('signupForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!firstName || !lastName) {
+                showError('Vui lòng nhập họ và tên');
+                return;
+            }
+
+            if (!email || !isValidEmail(email)) {
+                showError('Vui lòng nhập email hợp lệ');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('Mật khẩu phải có ít nhất 8 ký tự');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('Mật khẩu không khớp');
+                return;
+            }
+
+            await registerUser({ firstName, lastName, email, phone, password, confirmPassword });
+        });
+
+        async function registerUser(userData) {
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Đang xử lý...';
+
+            try {
+                console.log('Sending to server:', userData);
+                
+                const response = await fetch(`${API_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                const data = await response.json();
+                console.log('Server response:', data);
+
+                if (!response.ok) {
+                    showError(data.message || 'Lỗi khi tạo tài khoản');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                    return;
+                }
+
+                showSuccess('✅ Tài khoản tạo thành công! Chuyển đến trang đăng nhập...');
+                
+                setTimeout(() => {
+                    window.location.href = 'restaurant_login.html';
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Lỗi kết nối. Đảm bảo server đang chạy trên http://localhost:5000');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showError(message) {
+            errorMessage.textContent = '❌ ' + message;
+            errorMessage.style.display = 'block';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
